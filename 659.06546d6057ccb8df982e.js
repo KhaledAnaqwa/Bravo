@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdemo1=self.webpackChunkdemo1||[]).push([[659],{1659:(D,n,o)=>{o.r(n),o.d(n,{DashboardModule:()=>r});var E=o(8583),M=o(3423),_=o(7138),l=o(3389),d=o(7716);let r=(()=>{class a{}return a.\u0275fac=function(t){return new(t||a)},a.\u0275mod=d.oAB({type:a}),a.\u0275inj=d.cJS({imports:[[E.ez,M.Bz.forChild([{path:"",component:_.M}]),l.HB]]}),a})()}}]);
