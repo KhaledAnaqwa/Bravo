@@ -34,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       {
         path: 'items',
         component: ItemRecommedationComponent,
+        data:{bundleSize:-1}
       },
     ]),
   ],

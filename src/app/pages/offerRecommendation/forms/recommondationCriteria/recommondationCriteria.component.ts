@@ -30,10 +30,10 @@ export class RecommondationCriteriaComponent implements OnInit {
     setTimeout(() => {
       this.isLoading$.next(false);
       this.cdr.detectChanges();
-      alert(JSON.stringify(this.recommendationForm.value))
+      // alert(JSON.stringify(this.recommendationForm.value))
       // alert(this.recommendationForm.value["itemsList"]+this.recommendationForm.value["bundleSize"])
-      this.router.navigate(['offerRecommendation/items']);
-
+      this.router.navigate(['offerRecommendation/items',{bundleSize:this.recommendationForm.value["bundleSize"]}]);
+      
     }, 1500);
   }
 
