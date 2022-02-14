@@ -8,7 +8,7 @@ export class DataService {
 
   REST_API_SERVER= "http://eo66wm2ug7ktzd3.m.pipedream.net/?fromData=1&toDate=2";
   // url = "http://127.0.0.1:8000/"
-  url = "http://recommender-bravo.herokuapp.com/"
+  url = "https://recommender-bravo.herokuapp.com/"
 
   constructor(private httpClient: HttpClient) { }
   public sendGetRequest():any{
