@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkbravo=self.webpackChunkbravo||[]).push([[659],{1659:(D,n,o)=>{o.r(n),o.d(n,{DashboardModule:()=>l});var d=o(8583),E=o(3423),M=o(7138),_=o(3389),r=o(7716);let l=(()=>{class a{}return a.\u0275fac=function(t){return new(t||a)},a.\u0275mod=r.oAB({type:a}),a.\u0275inj=r.cJS({imports:[[d.ez,E.Bz.forChild([{path:"",component:M.M}]),_.HB]]}),a})()}}]);
