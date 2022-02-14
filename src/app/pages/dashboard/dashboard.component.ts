@@ -1,5 +1,7 @@
 
 import { Component, NgZone, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { DataService } from '../data.service';
 
 @Component({
@@ -8,36 +10,11 @@ import { DataService } from '../data.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  OrderTimeData: any = [1.3, 1.2, 1.5];
-  SalesData: any = {
-    data: [
-      {
-        name: 'This Week',
-        data: [60, 90, 70, 80, 60, 50, 80],
-      },
-      {
-        name: 'Last Week',
-        data: [40, 60, 70, 90, 60, 50, 70],
-      },
-    ],
-    dates: ['1/2', '2/2', '3/2', '4/2', '5/2', '6/2', '7/2']
-  };
-  Top5DepartmentData: any = {
-    data: [33, 50, 23, 2, 10],
-    labels: ['Canned/Jarred Goods', 'Beverages', 'Deli', 'Department A', 'Department B']
-  };
-
-  DailyOrdersData: any
-    = { data: [30, 100, 40, 90, 90, 10, 20], dates: ['1/2', '2/2', '3/2', '4/2', '5/2', '6/2', '7/2'] }
-
-  items: { name: string; departmentname: string, counts: number, growth: number }[] =
-    [
-      { "name": "item1", "departmentname": "Deli", "counts": 1400, "growth": 0 },
-      { "name": "item2", "departmentname": "Deli", "counts": 1100, "growth": 1 },
-      { "name": "item3", "departmentname": "Deli", "counts": 1000, "growth": -1 },
-      { "name": "item4", "departmentname": "Deli", "counts": 900, "growth": 1 },
-      { "name": "item5", "departmentname": "Deli", "counts": 100, "growth": -1 }
-    ]
+  OrderTimeData: any;
+  SalesData: any;
+  Top5DepartmentData: any;
+  DailyOrdersData: any;
+  items: any;
   i: { SalesData: any, DailyData: any, Top5Items: any, Top5DepartmentData: any, OrderTimeData: any };
 
 
@@ -45,26 +22,98 @@ export class DashboardComponent implements OnInit {
   constructor(private dataService: DataService, private ngZone: NgZone) {
 
   }
-
+  private unsubscribe: Subscription[] = [];
   ngOnInit(): void {
-    setTimeout(() =>{
-      this.dataService.sendGetRequest().subscribe({
-        next: (data) => {
-          let json = data
-          this.updateData(json)
-        },
-        error: error => {
-  
-          this.updateData(this.json)
-          // this.results = error.message;
-          // console.log(error)
-          // console.error('There was an error!', error);
-        }
-      })
-    }, 5000);
-  
-    
 
+    this.dataService.getSalesData().subscribe({
+      next: (data) => {
+        let json = data
+        this.SalesData = json
+      },
+      error: error => {
+        console.log(error)
+        console.error('There was an error!', error);
+      }
+    })
+    this.dataService.getDailyData().subscribe({
+      next: (data) => {
+        let json = data
+        this.DailyOrdersData = json
+      },
+      error: error => {
+        console.log(error)
+        console.error('There was an error!', error);
+      }
+    })
+    this.dataService.getOrderTimeData().subscribe({
+      next: (data) => {
+        let json = data
+        this.OrderTimeData = json
+      },
+      error: error => {
+        console.log(error)
+        console.error('There was an error!', error);
+      }
+    })
+    this.dataService.getTop5Dept().subscribe({
+      next: (data) => {
+        let json = data
+        this.Top5DepartmentData = json
+      },
+      error: error => {
+        console.log(error)
+        console.error('There was an error!', error);
+      }
+    })
+    this.dataService.getTop5Items().subscribe({
+      next: (data) => {
+        let json = data
+        this.items = json
+      },
+      error: error => {
+        console.log(error)
+        console.error('There was an error!', error);
+      }
+    })
+    
+    setTimeout(() => {
+
+    }, 5000);
+
+
+
+  }
+  init() {
+    this.OrderTimeData = [1.3, 1.2, 1.5];
+    this.SalesData = {
+      data: [
+        {
+          name: 'This Week',
+          data: [60, 90, 70, 80, 60, 50, 80],
+        },
+        {
+          name: 'Last Week',
+          data: [40, 60, 70, 90, 60, 50, 70],
+        },
+      ],
+      dates: ['1/2', '2/2', '3/2', '4/2', '5/2', '6/2', '7/2']
+    };
+    this.Top5DepartmentData = {
+      data: [33, 50, 23, 2, 10],
+      labels: ['Canned/Jarred Goods', 'Beverages', 'Deli', 'Department A', 'Department B']
+    };
+
+    this.DailyOrdersData
+      = { data: [30, 100, 40, 90, 90, 10, 20], dates: ['1/2', '2/2', '3/2', '4/2', '5/2', '6/2', '7/2'] }
+
+    this.items =
+      [
+        { "name": "item1", "departmentname": "Deli", "counts": 1400, "growth": 0 },
+        { "name": "item2", "departmentname": "Deli", "counts": 1100, "growth": 1 },
+        { "name": "item3", "departmentname": "Deli", "counts": 1000, "growth": -1 },
+        { "name": "item4", "departmentname": "Deli", "counts": 900, "growth": 1 },
+        { "name": "item5", "departmentname": "Deli", "counts": 100, "growth": -1 }
+      ]
   }
 
   public updateSeries(OrderTimeData: any): any {
@@ -76,7 +125,7 @@ export class DashboardComponent implements OnInit {
     this.SalesData = json.SalesData
     this.Top5DepartmentData = json.Top5DepartmentData
     this.items = json.Top5Items
-    
+
   }
 
   json = {

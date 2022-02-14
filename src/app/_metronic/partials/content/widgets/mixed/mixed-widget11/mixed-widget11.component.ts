@@ -17,43 +17,49 @@ export class MixedWidget11Component implements OnInit,OnChanges {
   SalesSum: any;
 
   constructor() {
-    this.chartOptions = getChartOptions(this.chartHeight, this.chartColor);
+    // this.chartOptions = getChartOptions(this.chartHeight, this.chartColor);
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.Update(changes.SalesData.currentValue)
   }
   Update(currentValue: any) {
-    this.chartOptions.series =currentValue.data;
-    this.chartOptions.xaxis.categories =currentValue.dates;
+    if (this.chartOptions.series){
+      if (this.chartOptions.xaxis.categories !=currentValue.dates )
+        this.chartOptions = getChartOptions(currentValue.data,currentValue.dates,this.chartHeight, this.chartColor)
+      else{
+        this.chartOptions.series=currentValue.data;
+      }
     this.SalesSum=currentValue.SalesSum
+    }
   }
 
   ngOnInit(): void {
-    this.chartOptions = getChartOptions(this.chartHeight, this.chartColor);
-    if (this.SalesData != null){
-      this.Update(this.SalesData)
-    }
+    this.chartOptions = getChartOptions([
+      {
+        name: 'This Week',
+        data: [60, 90, 70, 80, 60, 50, 80],
+      },
+      {
+        name: 'Last Week',
+        data: [40, 60, 70, 90, 60, 50, 70],
+      },
+    ],['1', '2', '3', '4', '5', '6', '7'],this.chartHeight, this.chartColor);
+    console.log("udpate")
+    // if (this.SalesData != null){
+    //   this.Update(this.SalesData)
+    // }
     
   }
 }
 
-function getChartOptions(chartHeight: string, chartColor: string) {
+function getChartOptions(data: any[],labels:String[],chartHeight: string, chartColor: string) {
   const labelColor = getCSSVariableValue('--bs-gray-500');
   const borderColor = getCSSVariableValue('--bs-gray-200');
   const secondaryColor = getCSSVariableValue('--bs-gray-300');
   const baseColor = getCSSVariableValue('--bs-' + chartColor);
 
   return {
-    series: [
-      {
-        name: 'This Week',
-        data: [50, 60, 70, 80, 60, 50, 70],
-      },
-      {
-        name: 'Last Week',
-        data: [50, 60, 70, 80, 60, 50, 70],
-      },
-    ],
+    series: data,
     chart: {
       fontFamily: 'inherit',
       type: 'bar',
@@ -81,7 +87,7 @@ function getChartOptions(chartHeight: string, chartColor: string) {
       colors: ['transparent'],
     },
     xaxis: {
-      categories: ['1', '2', '3', '4', '5', '6', '7'],
+      categories: labels,
       axisBorder: {
         show: false,
       },

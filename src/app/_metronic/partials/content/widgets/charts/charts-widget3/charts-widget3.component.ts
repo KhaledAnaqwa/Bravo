@@ -11,24 +11,34 @@ export class ChartsWidget3Component implements OnInit ,OnChanges{
   @Input() DailyOrdersData:any;
 
   constructor() {
-    this.chartOptions = getChartOptions(350);
+    this.chartOptions = getChartOptions(
+      [30, 100, 40, 90, 90, 10, 20],
+      ['1/2', '2/2', '3/2', '4/2', '5/2', '6/2', '7/2'],
+      350);
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.DailyOrdersData.currentValue){
     this.Update(changes.DailyOrdersData.currentValue)
-    console.log(changes.DailyOrdersData.currentValue)
+    // console.log(changes.DailyOrdersData.currentValue)
+    }
   }
   Update(currentValue:any):void{
-    this.chartOptions.series[0].data=currentValue.data;
-    this.chartOptions.xaxis.categories=currentValue.dates;
+    if (this.chartOptions.series[0].data){
+      this.chartOptions = getChartOptions(currentValue.data,currentValue.dates,350);
+      // this.chartOptions.series[0].data=currentValue.data;
+      // this.chartOptions.xaxis.categories=currentValue.dates;
+    }
   }
-
   ngOnInit(): void {
-    this.chartOptions = getChartOptions(350);
+    this.chartOptions = getChartOptions(
+      [30, 100, 40, 90, 90, 10, 20],
+      ['1/2', '2/2', '3/2', '4/2', '5/2', '6/2', '7/2'],
+      350);
    
   }
 }
 
-function getChartOptions(height: number) {
+function getChartOptions(data:Number[],lable:String[],height: number) {
   const labelColor = getCSSVariableValue('--bs-gray-500');
   const borderColor = getCSSVariableValue('--bs-gray-200');
   const baseColor = getCSSVariableValue('--bs-info');
@@ -38,7 +48,7 @@ function getChartOptions(height: number) {
     series: [
       {
         name: '# Order',
-        data: [30, 40, 40, 90, 90, 70, 70],
+        data: data,
       },
     ],
     chart: {
@@ -67,7 +77,7 @@ function getChartOptions(height: number) {
       colors: [baseColor],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+      categories: lable,
       axisBorder: {
         show: false,
       },

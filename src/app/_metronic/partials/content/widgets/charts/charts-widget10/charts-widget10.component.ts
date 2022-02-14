@@ -13,7 +13,9 @@ export class ChartsWidget10Component implements OnInit ,OnChanges{
     this.chartOptions = getChartOptions(); 
   }
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.Top5DepartmentData.currentValue){
     this.Update(changes.Top5DepartmentData.currentValue)
+  }
   }
 public updateSeries(){
   this.chartOptions.series=[1, 11,12, 70, 2]

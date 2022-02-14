@@ -27,11 +27,10 @@
               class="form-select form-select-solid form-select-lg"
               name="itemsList"
             >
-              <option value="fi">Feb items</option>
-              <option value="ri">Ramadan items</option>
-              <option value="btsi">Back to Shcool items</option>
-              <option value="wi">Winter items</option>
-              <option value="si">Summar items</option>
+              
+              <option value="Ramadan">Ramadan items</option>
+              <option value="Shcool">Back to Shcool items</option>
+              
               
             </select>
             <div class="form-text">
@@ -130,7 +129,7 @@
           [disabled]="isLoading"
           (click)="saveSettings()"
         >
-          <ng-container *ngIf="!isLoading">Save Changes</ng-container>
+          <ng-container *ngIf="!isLoading">Build Recommendation</ng-container>
           <ng-container *ngIf="isLoading">
             <span clas="indicator-progress" [style.display]="'block'">
               Please wait...{{ " " }}

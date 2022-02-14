@@ -9,12 +9,12 @@ export const environment = {
   isMockEnabled: true,
   apiUrl: 'https://khaledanaqwa.github.io/Bravo',
   appThemeName: 'Metronic',
-  appHTMLIntegration: 'https://preview.keenthemes.com/metronic8/demo1/documentation/base/helpers/flex-layouts.html',
-  appPurchaseUrl: 'https://1.envato.market/EA4JP',
-  appPreviewUrl: 'https://preview.keenthemes.com/metronic8/angular/demo1/',
-  appPreviewAngularUrl: 'https://preview.keenthemes.com/metronic8/angular/demo1',
-  appPreviewDocsUrl: 'https://preview.keenthemes.com/metronic8/angular/docs',
-  appPreviewChangelogUrl: 'https://preview.keenthemes.com/metronic8/angular/docs/docs/changelog',
+  appHTMLIntegration: 'https://khaledanaqwa.github.io/Bravo',
+  appPurchaseUrl: 'https://khaledanaqwa.github.io/Bravo',
+  appPreviewUrl: 'https://khaledanaqwa.github.io/Bravo',
+  appPreviewAngularUrl: 'https://khaledanaqwa.github.io/Bravo',
+  appPreviewDocsUrl: 'https://khaledanaqwa.github.io/Bravo',
+  appPreviewChangelogUrl: 'https://khaledanaqwa.github.io/Bravo',
 };
 
 /*
