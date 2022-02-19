@@ -71,12 +71,18 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json",
+            "browserTarget": "bravo:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "bravo:build:production"
+              "browserTarget": "bravo:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
-              "browserTarget": "bravo:build:development"
+              "browserTarget": "bravo:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

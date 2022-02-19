@@ -7,7 +7,7 @@ export const environment = {
   appVersion: 'v8.0.25',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  apiUrl: 'https://khaledanaqwa.github.io/Bravo',
+  apiUrl: 'https://recommender-bravo.herokuapp.com/',
   appThemeName: 'Metronic',
   appHTMLIntegration: 'https://khaledanaqwa.github.io/Bravo',
   appPurchaseUrl: 'https://khaledanaqwa.github.io/Bravo',
