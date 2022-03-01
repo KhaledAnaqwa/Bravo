@@ -99,7 +99,6 @@ export class DataService {
 
   public getRecommendation(ListItems:String[],BundelSize:Number,ListType:string){
     return this.httpClient.get<string>(this.url+"getRecommendation",{headers:new HttpHeaders({ 
-      'Content-Type': 'application/json',
       'ListItems': JSON.stringify(ListItems),
       'BundelSize':JSON.stringify(BundelSize),
       'ListType': JSON.stringify(ListType)
